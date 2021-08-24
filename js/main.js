@@ -134,6 +134,7 @@ var showPopup = (evt) => {
   document.addEventListener('click', closeClickPopup);
   document.addEventListener('keydown', closeEscMenu);
   login.classList.remove('login--hidden');
+  document.querySelector('.login__input-wrapper input[type=email]').focus();
   document.body.style.overflow = 'hidden';
   tabIndexOn();
 }
