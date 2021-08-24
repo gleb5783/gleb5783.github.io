@@ -201,11 +201,40 @@ $(document).ready(function() {
           breakpoint: 767,
           settings: {
             slidesToShow: 2,
-            dots: true,
+            dots: false,
             slidesToScroll: 2,
             arrows: false
           }
         }
       ]
+  });
+
+  $('.main-product__slider-list').on('afterChange', function(event, slick, currentSlide) {
+    var curent = document.querySelector('.main-product__slider-dotted-current');
+
+    if (currentSlide === 0) {
+      curent.innerHTML = 1;
+    }
+
+    if (currentSlide === 2) {
+      curent.innerHTML = 2;
+    }
+
+    if (currentSlide === 4) {
+      curent.innerHTML = 3;
+    }
+
+    if (currentSlide === 6) {
+      curent.innerHTML = 4;
+    }
+
+    if (currentSlide === 8) {
+      curent.innerHTML = 5;
+    }
+
+    if (currentSlide === 10) {
+      curent.innerHTML = 6;
+    }
+
   });
 });
