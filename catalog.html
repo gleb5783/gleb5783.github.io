@@ -80,7 +80,7 @@
               </div>
             </li>
             <li class="header__head-list-item">
-              <a class="header__logo" href="index.html">
+              <a class="header__logo" href="main.html">
                 <svg width="66" height="66" xmlns="http://www.w3.org/2000/svg">
                   <use xlink:href="#logo"></use>
                 </svg>
@@ -98,18 +98,27 @@
           </ul>
         </li>
         <li class="header__list-item-bottom-group">
-          <ul class="header__drop-meny-list header__drop-meny-list--vission">
-            <li><a href="#">What’s new</a></li>
-            <li><a href="#">Chokers</a></li>
-            <li><a href="#">Necklaces</a></li>
-            <li><a href="#">Rings</a></li>
-            <li><a href="#">Earrings</a></li>
-            <li>
+          <ul class="header__drop-menu-list header__drop-menu-list--vission">
+            <li class="header__drop-menu-list-tablet-form">
+              <form action="#" method="GET" name="search-site">
+                <input class="" type="text" id="page-search-tablet" name="page-search-tablet" placeholder="Type here to search">
+                <label for="page-search-tablet" class="visually-hidden"></label>
+              </form>
+            </li>
+            <li><a href="catalog.html">What’s new</a></li>
+            <li><a href="catalog.html">Chokers</a></li>
+            <li><a href="catalog.html">Necklaces</a></li>
+            <li><a href="catalog.html">Rings</a></li>
+            <li><a href="catalog.html">Earrings</a></li>
+            <li class="header__drop-menu-tablet--hidden">
               <ul class="header__drop-menu-tablet">
-                <li><a href="#">About CH</a></li>
-                <li><a href="#">Stores & Hours</a></li>
-                <li><a href="#">Contact US</a></li>
+                <li><a href="catalog.html">About CH</a></li>
+                <li><a href="catalog.html">Stores & Hours</a></li>
+                <li><a href="catalog.html">Contact US</a></li>
               </ul>
+            </li>
+            <li class="header__drop-menu-tablet--hidden">
+              <a href="login.html" class="header__login header__login-tablet">Login</a>
             </li>
           </ul>
         </li>
@@ -128,11 +137,6 @@
         <button type="button" class="catalog__tablet-show-filter">Filter</button>
         <div class="catalog__filter catalog__filter--hidden">
           <form action="#" method="GET" name="catalog-filter">
-            <button type="button" class="catalog__close-form">
-              <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <use xlink:href="#close-filter"></use>
-              </svg>
-            </button>
             <fieldset class="catalog__form-fieldset">
               <legend class="visually-hidden">Product-filter</legend>
 
@@ -146,22 +150,22 @@
               <div class="catalog__product-checkbox">
                 <div class="catalog__product-checkbox-wrapper">
                   <input type="checkbox" name="necklaces" id="necklaces" checked="">
-                  <label for="necklaces" tabindex="0">Necklaces</label>
+                  <label for="necklaces">Necklaces</label>
                 </div>
 
                 <div class="catalog__product-checkbox-wrapper">
                   <input type="checkbox" name="chokers" id="chokers" checked="">
-                  <label for="chokers" tabindex="0">Chokers</label>
+                  <label for="chokers">Chokers</label>
                 </div>
 
                 <div class="catalog__product-checkbox-wrapper">
                   <input type="checkbox" name="rings" id="rings">
-                  <label for="rings" tabindex="0">Rings</label>
+                  <label for="rings">Rings</label>
                 </div>
 
                 <div class="catalog__product-checkbox-wrapper">
                   <input type="checkbox" name="earrings" id="earrings" checked="">
-                  <label for="earrings" tabindex="0">Earrings</label>
+                  <label for="earrings">Earrings</label>
                 </div>
               </div>
             </fieldset>
@@ -179,12 +183,12 @@
               <div class="catalog__material-checkbox catalog__material-checkbox--hidden">
                 <div class="catalog__material-checkbox-wrapper">
                   <input type="checkbox" name="gold" id="gold">
-                  <label for="gold" tabindex="0">Gold</label>
+                  <label for="gold">Gold</label>
                 </div>
 
                 <div class="catalog__material-checkbox-wrapper">
                   <input type="checkbox" name="silver" id="silver">
-                  <label for="silver" tabindex="0">Silver</label>
+                  <label for="silver">Silver</label>
                 </div>
               </div>
             </fieldset>
@@ -201,12 +205,12 @@
               <div class="catalog__material-checkbox catalog__material-checkbox--hidden">
                 <div class="catalog__collection-checkbox-wrapper">
                   <input type="checkbox" name="pink-flamingo" id="pink-flamingo">
-                  <label for="pink-flamingo" tabindex="0">Pink-flamingo</label>
+                  <label for="pink-flamingo">Pink-flamingo</label>
                 </div>
 
                 <div class="catalog__collection-checkbox-wrapper">
                   <input type="checkbox" name="dream" id="dream">
-                  <label for="dream" tabindex="0">Dream</label>
+                  <label for="dream">Dream</label>
                 </div>
               </div>
             </fieldset>
@@ -236,6 +240,12 @@
               <button class="catalog__btn catalog__btn--aply" type="submit">Apply</button>
               <button class="catalog__btn catalog__btn--reset" type="button">Clear All</button>
             </div>
+
+            <button type="button" class="catalog__close-form">
+              <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <use xlink:href="#close-filter"></use>
+              </svg>
+            </button>
           </form>
         </div>
 

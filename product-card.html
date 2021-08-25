@@ -72,7 +72,7 @@
             </div>
           </li>
           <li class="header__head-list-item">
-            <a class="header__logo" href="index.html">
+            <a class="header__logo" href="main.html">
               <svg width="66" height="66" xmlns="http://www.w3.org/2000/svg">
                 <use xlink:href="#logo"></use>
               </svg>
@@ -90,18 +90,27 @@
         </ul>
       </li>
       <li class="header__list-item-bottom-group">
-        <ul class="header__drop-meny-list header__drop-meny-list--vission">
+        <ul class="header__drop-menu-list header__drop-menu-list--vission">
+          <li class="header__drop-menu-list-tablet-form">
+            <form action="#" method="GET" name="search-site">
+              <input class="" type="text" id="page-search-tablet" name="page-search-tablet" placeholder="Type here to search">
+              <label for="page-search-tablet" class="visually-hidden"></label>
+            </form>
+          </li>
           <li><a href="catalog.html">What’s new</a></li>
           <li><a href="catalog.html">Chokers</a></li>
           <li><a href="catalog.html">Necklaces</a></li>
           <li><a href="catalog.html">Rings</a></li>
           <li><a href="catalog.html">Earrings</a></li>
-          <li>
+          <li class="header__drop-menu-tablet--hidden">
             <ul class="header__drop-menu-tablet">
               <li><a href="catalog.html">About CH</a></li>
               <li><a href="catalog.html">Stores & Hours</a></li>
               <li><a href="catalog.html">Contact US</a></li>
             </ul>
+          </li>
+          <li class="header__drop-menu-tablet--hidden">
+            <a href="login.html" class="header__login header__login-tablet">Login</a>
           </li>
         </ul>
       </li>
@@ -342,11 +351,6 @@
 
   <section class="product-card-popup product-card-popup--hidden">
     <div class="product-card-popup__wrapper">
-      <button type="button" class="product-card-popup__close-btn">
-        <svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <use xlink:href="#close-popup"></use>
-        </svg>
-      </button>
       <h2>The item was added to your cart</h2>
       <ul class="product-card-popup__list">
         <li class="product-card-popup__list-item">
@@ -383,6 +387,12 @@
         <a href="catalog.html" class="product-card-popup__btn product-card-popup__btn--continue">Continue shopping</a>
         <button class="product-card-popup__btn product-card-popup__btn--checkout" type="button">Checkout</button>
       </div>
+
+      <button type="button" class="product-card-popup__close-btn">
+        <svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <use xlink:href="#close-popup"></use>
+        </svg>
+      </button>
     </div>
   </section>
 

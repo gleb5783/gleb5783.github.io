@@ -10,6 +10,7 @@ allDropDownBtn.forEach((element) => element.addEventListener('click', () => {
 var allDropDownFilterBtn = document.querySelectorAll('.catalog__filter-show-btn');
 var filterShowBtn = document.querySelector('.catalog__tablet-show-filter');
 var filterCloseBtn = document.querySelector('.catalog__close-form');
+var clearFilter = document.querySelector('.catalog__btn--reset');
 
 allDropDownFilterBtn.forEach((element) => element.addEventListener('click', () => {
     var parent = element.closest('fieldset').querySelector('div');
@@ -18,12 +19,23 @@ allDropDownFilterBtn.forEach((element) => element.addEventListener('click', () =
   })
 );
 
+function tabIndexFilterOn () {
+  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', '-1'));
+  document.querySelector('.catalog__filter').querySelectorAll('*').forEach((a) => a.setAttribute('tabindex', 'auto'));
+}
+
+function tabIndexFilterOff () {
+  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', 'auto'));
+}
+
 function closeFormFilter (evt) {
   if (evt.target === document.querySelector('.catalog__filter')) {
     document.querySelector('.catalog__filter').classList.toggle('catalog__filter--hidden');
     filterCloseBtn.removeEventListener('click', closeForm);
     filterCloseBtn.removeEventListener('click', closeFormFilter);
     document.removeEventListener('keydown', closeEscFilter);
+    document.querySelector('.body').classList.remove('body--overflow');
+    tabIndexFilterOff();
   }
 }
 
@@ -33,6 +45,8 @@ function closeEscFilter(evt) {
     filterCloseBtn.removeEventListener('click', closeForm);
     filterCloseBtn.removeEventListener('click', closeFormFilter);
     document.removeEventListener('keydown', closeEscFilter);
+    document.querySelector('.body').classList.remove('body--overflow');
+    tabIndexFilterOff();
   }
 }
 
@@ -41,6 +55,8 @@ function closeForm () {
   filterCloseBtn.removeEventListener('click', closeForm);
   filterCloseBtn.removeEventListener('click', closeFormFilter);
   document.removeEventListener('keydown', closeEscFilter);
+  document.querySelector('.body').classList.toggle('body--overflow');
+  tabIndexFilterOff();
 }
 
 function openFilter() {
@@ -48,14 +64,28 @@ function openFilter() {
   document.querySelector('.catalog__filter').classList.toggle('catalog__filter--hidden');
   filterCloseBtn.addEventListener('click', closeForm);
   document.addEventListener('keydown', closeEscFilter);
+  document.querySelector('.body').classList.toggle('body--overflow');
+  tabIndexFilterOn();
 }
 
 if (filterShowBtn) {
   filterShowBtn.addEventListener('click', openFilter, false);
+  clearFilter.addEventListener('click', function (){
+    document.querySelector('#necklaces').checked = true;
+    document.querySelector('#chokers').checked = true;
+    document.querySelector('#rings').checked = false;
+    document.querySelector('#earrings').checked = true;
+    document.querySelector('#gold').checked = false;
+    document.querySelector('#silver').checked = false;
+    document.querySelector('#pink-flamingo').checked = false;
+    document.querySelector('#dream').checked = false;
+  });
 }
 
+
 var openMenuBtn = document.querySelector('.header__burger');
-var menuLink = document.querySelectorAll('.header__drop-meny-list a');
+var menuLink = document.querySelectorAll('.header__drop-menu-list a');
+
 
 function escClose (evt) {
   if(isEscEvent(evt)) {
@@ -78,10 +108,16 @@ function menuToggle () {
   document.querySelector('.body').classList.toggle('body--overflow');
 }
 
-menuLink.forEach((el) => el.addEventListener('click', function() {
-  menuToggle();
-  document.removeEventListener('keydown', escClose);
-  document.querySelector('.body').classList.remove('body--overflow');
+menuLink.forEach((el) => el.addEventListener('click', function(evt) {
+  if(el.getAttribute('href') === '#') {
+    evt.preventDefault();
+  }
+
+  else {
+    menuToggle();
+    document.removeEventListener('keydown', escClose);
+    document.querySelector('.body').classList.remove('body--overflow');
+  }
 }));
 
 openMenuBtn.addEventListener('click', menuToggle);
@@ -90,7 +126,8 @@ var ESC_BUTTON = 'Esc';
 var ESCAPE_BUTTON = 'Escape';
 var login = document.querySelector('.login');
 var closePopupButton = document.querySelector('.login__close');
-var openPopup = document.querySelector('.header__login');
+var openPopup = document.querySelectorAll('.header__login');
+
 
 function isEscEvent(evt) {
   return evt.key === ESCAPE_BUTTON || evt.key === ESC_BUTTON;
@@ -139,18 +176,31 @@ var showPopup = (evt) => {
   tabIndexOn();
 }
 
-openPopup.addEventListener('click', showPopup);
+openPopup.forEach((link) => link.addEventListener('click', showPopup));
+
+// openPopup.addEventListener('click', showPopup);
 closePopupButton.addEventListener('click', closePopup);
 
 var addToCartBtn = document.querySelector('.card__add-btn');
 var card = document.querySelector('.product-card-popup');
 var closeCartBtn = document.querySelector('.product-card-popup__close-btn');
 
+function tabIndexProductOn () {
+  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', '-1'));
+  document.querySelector('.product-card-popup__wrapper').querySelectorAll('*').forEach((a) => a.setAttribute('tabindex', 'auto'));
+}
+
+function tabIndexProductOff () {
+  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', 'auto'));
+}
+
 function closeCart () {
   card.classList.toggle('product-card-popup--hidden');
   document.removeEventListener('keydown', closeCardEscCart);
   document.removeEventListener('click', closeClickCart);
   closeCartBtn.removeEventListener('click', closeCart);
+  document.querySelector('.body').classList.remove('body--overflow');
+  tabIndexProductOff();
 }
 
 function closeCardEscCart(evt) {
@@ -159,6 +209,8 @@ function closeCardEscCart(evt) {
     document.removeEventListener('keydown', closeCardEscCart);
     document.removeEventListener('click', closeClickCart);
     closeCartBtn.removeEventListener('click', closeCart);
+    document.querySelector('.body').classList.remove('body--overflow');
+    tabIndexProductOff();
   }
 }
 
@@ -168,6 +220,8 @@ function closeClickCart (evt) {
     document.removeEventListener('click', closeClickCart);
     document.removeEventListener('keydown', closeCardEscCart);
     closeCartBtn.removeEventListener('click', closeCart);
+    document.querySelector('.body').classList.remove('body--overflow');
+    tabIndexProductOff();
   }
 }
 
@@ -176,6 +230,8 @@ function addToCart () {
   document.addEventListener('keydown', closeCardEscCart);
   document.addEventListener('click', closeClickCart);
   closeCartBtn.addEventListener('click', closeCart);
+  document.querySelector('.body').classList.toggle('body--overflow');
+  tabIndexProductOn();
 }
 
 if(addToCartBtn) {
