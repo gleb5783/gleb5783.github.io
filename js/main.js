@@ -1,297 +1,104 @@
-var allDropDownBtn = document.querySelectorAll('.about-us__item-button');
+$(document).ready(function(){
+    $.fn.setCursorPosition = function(pos) {
+        if ($(this).get(0).setSelectionRange) {
+          $(this).get(0).setSelectionRange(pos, pos);
+        } else if ($(this).get(0).createTextRange) {
+          var range = $(this).get(0).createTextRange();
+          range.collapse(true);
+          range.moveEnd('character', pos);
+          range.moveStart('character', pos);
+          range.select();
+        }
+      };
 
-allDropDownBtn.forEach((element) => element.addEventListener('click', () => {
-    var parent = element.closest('li').querySelector('p');
-    element.classList.toggle('about-us__item-button--open');
-    parent.classList.toggle('about-us__text--hidden');
-  })
-);
+    $("#tel").click(function(){
+        $(this).setCursorPosition(3);
+      }).mask("+7(999) 999-9999");
+      $("#tel").mask("+7(999) 999-9999");
+});
+const burger = document.querySelector('.header__burger');
+const menu = document.querySelector('.header__link-list');
+const btnGroup = document.querySelector('.header__items--order-3');
 
-var allDropDownFilterBtn = document.querySelectorAll('.catalog__filter-show-btn');
-var filterShowBtn = document.querySelector('.catalog__tablet-show-filter');
-var filterCloseBtn = document.querySelector('.catalog__close-form');
-var clearFilter = document.querySelector('.catalog__btn--reset');
+let openMenu = () => {
+    menu.classList.toggle('header__link-list--toggle');
 
-allDropDownFilterBtn.forEach((element) => element.addEventListener('click', () => {
-    var parent = element.closest('fieldset').querySelector('div');
-    element.classList.toggle('catalog__filter-show-btn--open');
-    parent.classList.toggle('catalog__material-checkbox--hidden');
-  })
-);
-
-function tabIndexFilterOn () {
-  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', '-1'));
-  document.querySelector('.catalog__filter').querySelectorAll('*').forEach((a) => a.setAttribute('tabindex', 'auto'));
+    if (window.innerWidth <= 767) {
+        btnGroup.classList.toggle('header__items--hidden');
+    }
 }
 
-function tabIndexFilterOff () {
-  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', 'auto'));
-}
-
-function closeFormFilter (evt) {
-  if (evt.target === document.querySelector('.catalog__filter')) {
-    document.querySelector('.catalog__filter').classList.toggle('catalog__filter--hidden');
-    filterCloseBtn.removeEventListener('click', closeForm);
-    filterCloseBtn.removeEventListener('click', closeFormFilter);
-    document.removeEventListener('keydown', closeEscFilter);
-    document.querySelector('.body').classList.remove('body--overflow');
-    tabIndexFilterOff();
-  }
-}
-
-function closeEscFilter(evt) {
-  if(isEscEvent(evt)) {
-    document.querySelector('.catalog__filter').classList.toggle('catalog__filter--hidden');
-    filterCloseBtn.removeEventListener('click', closeForm);
-    filterCloseBtn.removeEventListener('click', closeFormFilter);
-    document.removeEventListener('keydown', closeEscFilter);
-    document.querySelector('.body').classList.remove('body--overflow');
-    tabIndexFilterOff();
-  }
-}
-
-function closeForm () {
-  document.querySelector('.catalog__filter').classList.toggle('catalog__filter--hidden');
-  filterCloseBtn.removeEventListener('click', closeForm);
-  filterCloseBtn.removeEventListener('click', closeFormFilter);
-  document.removeEventListener('keydown', closeEscFilter);
-  document.querySelector('.body').classList.toggle('body--overflow');
-  tabIndexFilterOff();
-}
-
-function openFilter() {
-  document.addEventListener('click', closeFormFilter);
-  document.querySelector('.catalog__filter').classList.toggle('catalog__filter--hidden');
-  filterCloseBtn.addEventListener('click', closeForm);
-  document.addEventListener('keydown', closeEscFilter);
-  document.querySelector('.body').classList.toggle('body--overflow');
-  tabIndexFilterOn();
-}
-
-if (filterShowBtn) {
-  filterShowBtn.addEventListener('click', openFilter, false);
-  clearFilter.addEventListener('click', function (){
-    document.querySelector('#necklaces').checked = true;
-    document.querySelector('#chokers').checked = true;
-    document.querySelector('#rings').checked = false;
-    document.querySelector('#earrings').checked = true;
-    document.querySelector('#gold').checked = false;
-    document.querySelector('#silver').checked = false;
-    document.querySelector('#pink-flamingo').checked = false;
-    document.querySelector('#dream').checked = false;
-  });
-}
-
-
-var openMenuBtn = document.querySelector('.header__burger');
-var menuLink = document.querySelectorAll('.header__drop-menu-list a');
-
-
-function escClose (evt) {
-  if(isEscEvent(evt)) {
-    menuToggle();
-    document.removeEventListener('keydown', escClose);
-    document.querySelector('.body').classList.remove('body--overflow');
-  }
-}
-
-function menuToggle () {
-  document.querySelector('.header__list').classList.toggle('header__list--open');
-  document.querySelector('.header__input-wrapper').classList.toggle('header__input-wrapper--menu-hidden');
-  openMenuBtn.classList.toggle('header__burger--open');
-  document.querySelector('.header__input').classList.toggle('header__input--hidden');
-  document.querySelector('.header__logo').classList.toggle('header__logo--menu');
-  document.querySelector('.header__login').classList.toggle('header__login--vission');
-  document.querySelector('.header__basket').classList.toggle('header__basket--open');
-  document.querySelector('.header__list-item-bottom-group').classList.toggle('header__list-item-bottom-group--hidden');
-  document.addEventListener('keydown', escClose);
-  document.querySelector('.body').classList.toggle('body--overflow');
-}
-
-menuLink.forEach((el) => el.addEventListener('click', function(evt) {
-  if(el.getAttribute('href') === '#') {
-    evt.preventDefault();
-  }
-
-  else {
-    menuToggle();
-    document.removeEventListener('keydown', escClose);
-    document.querySelector('.body').classList.remove('body--overflow');
-  }
-}));
-
-openMenuBtn.addEventListener('click', menuToggle);
-
-var ESC_BUTTON = 'Esc';
-var ESCAPE_BUTTON = 'Escape';
-var login = document.querySelector('.login');
-var closePopupButton = document.querySelector('.login__close');
-var openPopup = document.querySelectorAll('.header__login');
-
-
-function isEscEvent(evt) {
-  return evt.key === ESCAPE_BUTTON || evt.key === ESC_BUTTON;
-}
+burger.addEventListener('click', openMenu);
+const ESC_BUTTON = 'Esc';
+const ESCAPE_BUTTON = 'Escape';
+const popup = document.querySelector('.popup');
+const body = document.querySelector('.body');
+const closePopupBtn = document.querySelector('.popup__close-btn');
+const applicationBtn = document.querySelectorAll('#application');
 
 function tabIndexOn () {
-  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', '-1'));
-  login.querySelectorAll('*').forEach((a) => a.setAttribute('tabindex', 'auto'));
+    document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', '-1'));
+    popup.querySelectorAll('*').forEach((a) => a.setAttribute('tabindex', 'auto'));
+  }
+  
+  function tabIndexOff () {
+    document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', 'auto'));
+  }
+
+let isEscEvent = (evt) => {
+    return evt.key === ESCAPE_BUTTON || evt.key === ESC_BUTTON;
 }
 
-function tabIndexOff () {
-  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', 'auto'));
+let closeEscPopup = (evt) => {
+    if(isEscEvent(evt)) {
+        closePopup();
+        tabIndexOff();
+    }
 }
 
-function closeEscMenu(evt) {
-  if (isEscEvent(evt)) {
-    login.classList.add('login--hidden');
-    document.body.style.overflow = 'auto';
+let closeClickPopup = (evt) => {
+    if (evt.target === popup) {
+        closePopup();
+        tabIndexOff();
+    }
+}
+
+let openPopup = () => {
+    popup.classList.remove('popup--hidden');
+    body.classList.add('body--overflow');
+    document.addEventListener('keydown', closeEscPopup);
+    document.addEventListener('click', closeClickPopup);
+    tabIndexOn();
+}
+
+let closePopup = () => {
+    popup.classList.add('popup--hidden');
+    body.classList.remove('body--overflow');
+    document.removeEventListener('keydown', closeEscPopup);
+    document.removeEventListener('click', closeClickPopup);
     tabIndexOff();
-  }
 }
 
-function closeClickPopup(evt) {
-  if(evt.target === login) {
-    login.classList.add('login--hidden');
-    document.body.style.overflow = 'auto';
-    tabIndexOff();
-  }
-}
-
-var closePopup = () => {
-  document.removeEventListener('click', closeClickPopup);
-  document.removeEventListener('keydown', closeEscMenu);
-  login.classList.add('login--hidden');
-  document.body.style.overflow = 'auto';
-  tabIndexOff();
-}
-
-var showPopup = (evt) => {
-  evt.preventDefault();
-  document.addEventListener('click', closeClickPopup);
-  document.addEventListener('keydown', closeEscMenu);
-  login.classList.remove('login--hidden');
-  document.querySelector('.login__input-wrapper input[type=email]').focus();
-  document.body.style.overflow = 'hidden';
-  tabIndexOn();
-}
-
-openPopup.forEach((link) => link.addEventListener('click', showPopup));
-
-// openPopup.addEventListener('click', showPopup);
-closePopupButton.addEventListener('click', closePopup);
-
-var addToCartBtn = document.querySelector('.card__add-btn');
-var card = document.querySelector('.product-card-popup');
-var closeCartBtn = document.querySelector('.product-card-popup__close-btn');
-
-function tabIndexProductOn () {
-  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', '-1'));
-  document.querySelector('.product-card-popup__wrapper').querySelectorAll('*').forEach((a) => a.setAttribute('tabindex', 'auto'));
-}
-
-function tabIndexProductOff () {
-  document.querySelectorAll('*').forEach((el) => el.setAttribute('tabindex', 'auto'));
-}
-
-function closeCart () {
-  card.classList.toggle('product-card-popup--hidden');
-  document.removeEventListener('keydown', closeCardEscCart);
-  document.removeEventListener('click', closeClickCart);
-  closeCartBtn.removeEventListener('click', closeCart);
-  document.querySelector('.body').classList.remove('body--overflow');
-  tabIndexProductOff();
-}
-
-function closeCardEscCart(evt) {
-  if (isEscEvent(evt)) {
-    card.classList.toggle('product-card-popup--hidden');
-    document.removeEventListener('keydown', closeCardEscCart);
-    document.removeEventListener('click', closeClickCart);
-    closeCartBtn.removeEventListener('click', closeCart);
-    document.querySelector('.body').classList.remove('body--overflow');
-    tabIndexProductOff();
-  }
-}
-
-function closeClickCart (evt) {
-  if(evt.target === card) {
-    card.classList.toggle('product-card-popup--hidden');
-    document.removeEventListener('click', closeClickCart);
-    document.removeEventListener('keydown', closeCardEscCart);
-    closeCartBtn.removeEventListener('click', closeCart);
-    document.querySelector('.body').classList.remove('body--overflow');
-    tabIndexProductOff();
-  }
-}
-
-function addToCart () {
-  card.classList.toggle('product-card-popup--hidden');
-  document.addEventListener('keydown', closeCardEscCart);
-  document.addEventListener('click', closeClickCart);
-  closeCartBtn.addEventListener('click', closeCart);
-  document.querySelector('.body').classList.toggle('body--overflow');
-  tabIndexProductOn();
-}
-
-if(addToCartBtn) {
-  addToCartBtn.addEventListener('click', addToCart, false);
-}
-
-$(document).ready(function() {
-  $('.main-product__slider-list').slick({
-    dots: true,
-    arrows: true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    infinite: false,
-      responsive: [
-        {
-          breakpoint: 1023,
-          settings: {
-            slidesToShow: 2,
-            dots: true,
-            slidesToScroll: 2
-          }
-        },
-        {
-          breakpoint: 767,
-          settings: {
-            slidesToShow: 2,
-            dots: false,
-            slidesToScroll: 2,
-            arrows: false
-          }
-        }
-      ]
-  });
-
-  $('.main-product__slider-list').on('afterChange', function(event, slick, currentSlide) {
-    var curent = document.querySelector('.main-product__slider-dotted-current');
-
-    if (currentSlide === 0) {
-      curent.innerHTML = 1;
-    }
-
-    if (currentSlide === 2) {
-      curent.innerHTML = 2;
-    }
-
-    if (currentSlide === 4) {
-      curent.innerHTML = 3;
-    }
-
-    if (currentSlide === 6) {
-      curent.innerHTML = 4;
-    }
-
-    if (currentSlide === 8) {
-      curent.innerHTML = 5;
-    }
-
-    if (currentSlide === 10) {
-      curent.innerHTML = 6;
-    }
-
-  });
+applicationBtn.forEach((el) => {
+    el.addEventListener('click', openPopup);
 });
+
+closePopupBtn.addEventListener('click', closePopup);
+$(document).ready(function(){
+    $('.main-content__slider').slick({
+      arrows: false,
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      pauseOnFocus: true,
+      pauseOnHover: true,
+      pauseOnDotsHover: true,
+    });
+    
+    document.querySelector('#slick-slide-control00').innerText = 'Dogie coin';
+    document.querySelector('#slick-slide-control01').innerText = 'Падение';
+    document.querySelector('#slick-slide-control02').innerText = 'Возвращение';
+  });
